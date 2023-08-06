@@ -2,6 +2,11 @@ class UserController{
     constructor(formId){
         this.formEl = document.getElementById(formId);
     }
+
+    onSubmit(){
+
+
+    }
 getValues(){
 
     let user = {};
@@ -29,7 +34,7 @@ getValues(){
         user.country,
         user.email,
         user.password,
-        user.photo,
+        user.photo, 
         user.admin,
     );
 
