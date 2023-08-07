@@ -79,15 +79,19 @@ class UserController {
 
         [...this.formEl.elements].forEach(function(field, index){
 
-            if (field.name === "gender") {
+            if (field.name == "gender") {
     
                 if (field.checked) {
                     user[field.name] = field.value
                 }
     
-            } else {
+            } else if(field.name == "admin"){
+                    user[field.name] = field.checked;
+                }
+
+             else {
     
-                user[field.name] = field.value
+                user[field.name] = field.value;
     
             }
     
@@ -109,19 +113,24 @@ class UserController {
     
     addLine(dataUser) {
 
-        this.tableEl.innerHTML = `
-            <tr>
-                <td><img src=${dataUser.photo} class="img-circle img-sm"></td>
-                <td>${dataUser.name}</td>
-                <td>${dataUser.email}</td>
-                <td>${dataUser.admin}</td>
-                <td>${dataUser.birth}</td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
-                    <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
-                </td>
-            </tr>
-        `;
+        let tr = document.createElement('tr');
+
+        tr.innerHTML = `
+        <tr>
+        <td><img src=${dataUser.photo} class="img-circle img-sm"></td>
+        <td>${dataUser.name}</td>
+        <td>${dataUser.email}</td>
+        <td>${dataUser.admin}</td>
+        <td>${dataUser.birth}</td>
+        <td>
+            <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+            <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
+        </td>
+    </tr>
+`;
+
+        this.tableEl.innerHTML = 
+           
 
     }
 
