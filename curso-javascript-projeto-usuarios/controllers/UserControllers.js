@@ -14,9 +14,10 @@ class UserController {
         this.formEl.addEventListener("submit", event => {
 
             event.preventDefault();
+
             let btn = this.formEl.querySelector("[type=submit]");
 
-            btn.disable = true;
+            btn.disabled = true;
 
             let values = this.getValues();
 
@@ -29,7 +30,8 @@ class UserController {
 
                     this.formEl.reset();
 
-                    btn.disable = false;
+                    btn.disabled = false;
+
                 }, 
                 (e) => {
                     console.error(e)
@@ -68,12 +70,11 @@ class UserController {
 
             };
 
-          if(file) { 
-            fileReader.readAsDataURL(file);}
-          else {
-            resolve('dist/img/boxed-bg.png');
-          }
-
+            if(file) {
+                fileReader.readAsDataURL(file);
+            } else {
+                resolve('dist/img/boxed-bg.jpg');
+            }
 
         });
 
@@ -85,19 +86,19 @@ class UserController {
 
         [...this.formEl.elements].forEach(function(field, index){
 
-            if (field.name == "gender") {
+            if (field.name === "gender") {
     
                 if (field.checked) {
                     user[field.name] = field.value
                 }
     
-            } else if(field.name == "admin"){
-                    user[field.name] = field.checked;
-                }
+            } else if(field.name == "admin") {
 
-             else {
+                user[field.name] = field.checked;
+
+            } else {
     
-                user[field.name] = field.value;
+                user[field.name] = field.value
     
             }
     
@@ -120,23 +121,22 @@ class UserController {
     addLine(dataUser) {
 
         let tr = document.createElement('tr');
-        tr.innerHTML = `
-        <tr>
-            <td><img src=${dataUser.photo} class="img-circle img-sm"></td>
-            <td>${dataUser.name}</td>
-            <td>${dataUser.email}</td>
-            <td>${(dataUser.admin) ? 'Sim' : 'Não'}</td>
-            <td>${dataUser.birth}</td>
-            <td>
-                <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
-                <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
-            </td>
-        </tr>
-    `;
 
+        tr.innerHTML = `
+            <tr>
+                <td><img src=${dataUser.photo} class="img-circle img-sm"></td>
+                <td>${dataUser.name}</td>
+                <td>${dataUser.email}</td>
+                <td>${(dataUser.admin) ? 'Sim' : 'Não'}</td>
+                <td>${dataUser.register}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+                    <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
+                </td>
+            </tr>
+        `;
 
         this.tableEl.appendChild(tr);
+
     }
-
-
 }
