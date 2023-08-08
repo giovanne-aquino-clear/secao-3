@@ -1,9 +1,9 @@
+class Utils {
 
-class utils {
+    static dateFormat(date) {
 
-static dateformat(date){
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
 
-    return date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()+' '+ date.getHours()+  ':' + date.getMinutes();
-}   
+    }
 
 }
