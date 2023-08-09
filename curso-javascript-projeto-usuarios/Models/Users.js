@@ -2,7 +2,6 @@ class User {
 
     constructor (name, gender, birth, country, email, password, photo, admin){
 
-
         this._id;
         this._name = name;
         this._gender = gender;
@@ -16,7 +15,7 @@ class User {
 
     }
 
-    get id () {
+    get id() {
         return this._id;
     }
 
@@ -69,12 +68,11 @@ class User {
 
             }
 
-
         }
 
-     }
+    }
 
-     static getUsersStorage () {
+    static getUsersStorage () {
 
         let users = [];
 
@@ -88,35 +86,65 @@ class User {
 
     }
 
-    getNewID(){
+    getNewID() {
 
-        if(!window.id) window.id = 0;
+        let usersID = parseInt(localStorage.getItem("userID"));
+
+        if (usersID) window.id = 0;
+
+        usersID++;
+
+        localStorage.setItem("usersID", usersID);
+
+        return usersID;
+
     }
 
-    save(){
-        let users = User.geUsersStorage();
+    save() {
 
-        if(this.id > 0){
+        let users = User.getUsersStorage();
 
-            users.map (u=>{
+        if (this.id > 0) {
 
-                if(u._id == this.id){
-                    
-                    Object.assign(u, this);
+            users.map(u => {
+
+                if (u._id == this._id) {
+
+                    Object.assign(u, this)
 
                 }
+
                 return u;
+
             });
-            
-        } else{
+
+        } else {
 
             this._id = this.getNewID();
-            users.push(this);
 
-    
+            users.push(this);
         }
+
         localStorage.setItem("users", JSON.stringify(users));
 
-        
     }
+
+    remove() {
+
+        let users = User.getUsersStorage();
+
+        users.forEach((userData, index) => {
+
+            if (this._id == userData._id) {
+
+                users.splice(index, 1)
+
+            }
+
+        });
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+    }
+
 }
